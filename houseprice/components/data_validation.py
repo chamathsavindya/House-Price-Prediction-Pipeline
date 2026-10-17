@@ -47,8 +47,9 @@ class DataValidation:
     def validate_column_names(self,dataframe):
         try:
             required_columns = self.__schema_config["columns"]
+          
 
-            if sorted(dataframe.columns) == sorted(required_columns):
+            if sorted(dataframe.columns) == sorted(list(required_columns[0].keys())):
                 return True
             else:
                 return False
@@ -107,10 +108,11 @@ class DataValidation:
 
             data_drift_status = self.ditect_data_drift(base_dataframe = train_dataframe,current_dataframe=test_dataframe,treshhold=0.05)
 
-            dir_path = os.path.dirname(self.data_validation_config.data_validation_valid_dir)
-            os.makedirs(dir_path)
+            dir_path = os.path.dirname(self.data_validation_config.data_validation_valid_train_file_path)
+            os.makedirs(dir_path,exist_ok=True)
 
 
+            print(self.data_validation_config.data_validation_valid_train_file_path)
             train_dataframe.to_csv(self.data_validation_config.data_validation_valid_train_file_path, index = False,header= True)
             test_dataframe.to_csv(self.data_validation_config.data_validation_valid_test_file_path, index = False,header= True)
 
@@ -118,8 +120,8 @@ class DataValidation:
                     valid_status = data_drift_status,
                     valid_train_file_path = self.data_validation_config.data_validation_valid_train_file_path,
                     valid_test_file_path = self.data_validation_config.data_validation_valid_test_file_path,
-                    invalid_train_file_path = None
-                    invalid_test_file_path = None
+                    invalid_train_file_path = None,
+                    invalid_test_file_path = None,
                     drift_report_file_path = self.data_validation_config.data_validation_drift_report_file_name
             )
 

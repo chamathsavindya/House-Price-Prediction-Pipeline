@@ -1,0 +1,4 @@
+[2026-10-15 22:28:04,744] 32 root - INFO - performed train test split
+[2026-10-15 22:28:05,052] 39 root - INFO - expoted ingested train and test data
+[2026-10-15 22:28:05,156] 38 root - INFO - data frame has requeired number of columns
+[2026-10-15 22:28:05,156] 38 root - INFO - data frame has requeired number of columns

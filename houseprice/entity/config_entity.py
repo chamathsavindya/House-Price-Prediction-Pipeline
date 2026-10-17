@@ -25,7 +25,7 @@ class DataValidationConfig:
         self.data_validation_valid_dir = os.path.join(self.data_validation_dir,constants.DATA_VALIDATION_VALID_DIR)
         self.data_validation_invalid_dir = os.path.join(self.data_validation_dir,constants.DATA_VALIDATION_INVALID_DIR)
         self.data_validation_drift_report_dir = os.path.join(self.data_validation_dir,constants.DATA_VALIDATION_DRIFT_REPORT_DIR)
-        self.data_validation_drift_report_file_name = os.path.join(self.data_validation_drift_report_dir,constants.DATA_VALIDATION_DRIFT_REPORT_FILR_NAME)
+        self.data_validation_drift_report_file_name = os.path.join(self.data_validation_drift_report_dir,constants.DATA_VALIDATION_DRIFT_REPORT_FILE_NAME)
         self.data_validation_valid_train_file_path = os.path.join(self.data_validation_valid_dir,constants.TRAIN_FILE_NAME)
         self.data_validation_valid_test_file_path = os.path.join(self.data_validation_valid_dir,constants.TEST_FILE_NAME)
         self.data_validation_invalid_train_file_path = os.path.join(self.data_validation_invalid_dir,constants.TRAIN_FILE_NAME)
@@ -34,12 +34,15 @@ class DataValidationConfig:
 class DataTransformationConfig:
     def __init__(self,training_pipeline_config):
         self.data_transformation_dir = os.path.join(training_pipeline_config.artifact_dir,constants.DATA_TRANSFORMATION_DIR)  
-        self.data_transformation_transformed_data_dir = os.path.join(self.data_transformed_dir,constants.DATA_TRANSFORMATION_TRANSFORMED_DATA_DIR) 
+        self.data_transformation_transformed_data_dir = os.path.join(self.data_transformation_dir,constants.DATA_TRANSFORMATION_TRANSFORMED_DATA_DIR) 
         self.data_transformation_transformed_object_dir  = os.path.join(self.data_transformation_dir,constants.DATA_TRANSFORMATION_TRANSFORMED_OBJECT_DIR)
         self.transformed_data_train_file_path = os.path.join(self.data_transformation_transformed_data_dir,constants.TRAIN_FILE_NAME.replace("csv","npy"))
         self.transformed_data_test_file_path = os.path.join(self.data_transformation_transformed_data_dir,constants.TEST_FILE_NAME.replace("csv","npy"))
 
 class ModelTrainerConfig:
-    def __init__(self):
-        pass        
+    def __init__(self,training_pipeline_config):
+        self.model_training_dir = os.path.join(training_pipeline_config.artifact_dir,constants.MODEL_TRAINING_DIR)
+        self.trained_model_dir = os.path.join(self.model_training_dir,constants.MODEL_TRAINING_TRAINED_MODEL_DIR)
+        self.trained_model_path = os.path.join(self.trained_model_dir,constants.MODEL_TRAINING_TRAINED_MODEL_NAME) 
+               
 

@@ -6,6 +6,8 @@ from houseprice.constants import DATA_TRANSFORMATION_IMPUTER_PARAMS
 
 from houseprice.utils.main_utils.utils import save_numpy_array,save_object
 
+from houseprice.entity.artifact_entity import DataTransformationArtifact
+
 from sklearn.pipeline import Pipeline
 from sklearn.impute import KNNImputer
 from sklearn.impute import SimpleImputer
@@ -98,12 +100,20 @@ class DataTransformation:
 
 
             ## save transformed data
-
-
+            save_numpy_array(self.data_transformation_config.transformed_data_train_file_path,train_array)
+            save_numpy_array(self.data_transformation_config.transformed_data_test_file_path,test_array)
+            
             ## save data transformer object for later use
+            save_object(self.data_transformation_config.data_transformation_transformed_object_dir,transformer)
 
             ## prepare data transformation artifact
-
+            data_transformation_artifact = DataTransformationArtifact(
+                transformed_train_file_path= self.data_transformation_config.transformed_data_train_file_path,
+                transformed_test_file_path= self.data_transformation_config.transformed_data_test_file_path,
+                transformed_object_file_path= self.data_transformation_config.data_transformation_transformed_object_dir,
+            )
             ## return data transformation artifact
+            return data_transformation_artifact
+        
         except Exception as e:
             raise HousePriceException(e,sys)    
